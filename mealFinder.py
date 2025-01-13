@@ -57,7 +57,7 @@ def main(meal_of_the_day):
             else:
                 correct_menu = menus[2]
         if len(menus) == 2:
-            if meal_of_the_day == 'Brunch':
+            if meal_of_the_day == 'Brunch' or meal_of_the_day == 'Lunch':
                 correct_menu = menus[0]
             else:
                 correct_menu = menus[1]
