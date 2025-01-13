@@ -1,9 +1,5 @@
-import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 favorite_foods = [
     'Chicken Biryani',
@@ -45,7 +41,7 @@ BURSLEY_URL = 'https://dining.umich.edu/menus-locations/dining-halls/bursley/'
 dining_halls = {'South Quad':SOUTH_QUAD_URL, 'East Quad':EAST_QUAD_URL, 'North Quad':NORTH_QUAD_URL, 'Mojo':MOJO_URL, 
                 'Markley':MARKLEY_URL, 'Bursley':BURSLEY_URL}
 
-def main(meal_of_the_day, bursley):
+def main(meal_of_the_day):
     driver = webdriver.Chrome()
     for key in dining_halls:
         dining_url = dining_halls[key]
@@ -58,15 +54,17 @@ def main(meal_of_the_day, bursley):
                 correct_menu = menus[0]
             elif meal_of_the_day == 'Lunch':
                 correct_menu = menus[1]
-            else
+            else:
                 correct_menu = menus[2]
         if len(menus) == 2:
             if meal_of_the_day == 'Brunch':
                 correct_menu = menus[0]
-            else
+            else:
                 correct_menu = menus[1]
+        if len(menus) == 1:
+            correct_menu = menus[0]
 
-        menu_text = correct_menu.get_text
+        menu_text = correct_menu.get_text(strip=True)
         count = 0
         print(key)
         for food in favorite_foods:
@@ -76,4 +74,4 @@ def main(meal_of_the_day, bursley):
         print("Total amount of favorite foods:", count)
         print(" ")
 
-        
+main("Lunch")      
