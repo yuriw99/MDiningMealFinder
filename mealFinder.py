@@ -62,7 +62,12 @@ def main(meal_of_the_day):
             else:
                 correct_menu = menus[1]
         if len(menus) == 1:
-            correct_menu = menus[0]
+            if meal_of_the_day == 'Brunch' or meal_of_the_day == 'Lunch':
+                correct_menu = menus[0]
+            else:
+                print(key, "only has one meal")
+                print(" ")
+                continue
 
         menu_text = correct_menu.get_text(strip=True)
         count = 0
@@ -74,4 +79,4 @@ def main(meal_of_the_day):
         print("Total amount of favorite foods:", count)
         print(" ")
 
-main("Lunch")      
+main("Dinner")      
