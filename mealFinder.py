@@ -42,9 +42,38 @@ MOJO_URL = 'https://dining.umich.edu/menus-locations/dining-halls/mosher-jordan/
 MARKLEY_URL = 'https://dining.umich.edu/menus-locations/dining-halls/markley/'
 BURSLEY_URL = 'https://dining.umich.edu/menus-locations/dining-halls/bursley/'
 
-DINING_HALLS = {'South Quad':SOUTH_QUAD_URL, 'East Quad':EAST_QUAD_URL, 'North Quad':NORTH_QUAD_URL, 'Mojo':MOJO_URL, 
+dining_halls = {'South Quad':SOUTH_QUAD_URL, 'East Quad':EAST_QUAD_URL, 'North Quad':NORTH_QUAD_URL, 'Mojo':MOJO_URL, 
                 'Markley':MARKLEY_URL, 'Bursley':BURSLEY_URL}
 
 def main(meal_of_the_day, bursley):
-    for key in DINING_HALLS:
-        url = DINING_HALLS[key]
+    driver = webdriver.Chrome()
+    for key in dining_halls:
+        dining_url = dining_halls[key]
+        driver.get(dining_url)
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        menus = soup.find_all('div', class_='courses')
+        correct_menu = None
+        if len(menus) == 3:
+            if meal_of_the_day == 'Breakfast':
+                correct_menu = menus[0]
+            elif meal_of_the_day == 'Lunch':
+                correct_menu = menus[1]
+            else
+                correct_menu = menus[2]
+        if len(menus) == 2:
+            if meal_of_the_day == 'Brunch':
+                correct_menu = menus[0]
+            else
+                correct_menu = menus[1]
+
+        menu_text = correct_menu.get_text
+        count = 0
+        print(key)
+        for food in favorite_foods:
+            if food in menu_text:
+                print(food)
+                count += 1
+        print("Total amount of favorite foods:", count)
+        print(" ")
+
+        
