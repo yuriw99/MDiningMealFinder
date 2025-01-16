@@ -68,6 +68,10 @@ def main(meal_of_the_day):
                 print(key, "only has one meal")
                 print(" ")
                 continue
+        if len(menus) == 0:
+            print(key, "is closed")
+            print(" ")
+            continue
 
         menu_text = correct_menu.get_text(strip=True)
         count = 0
